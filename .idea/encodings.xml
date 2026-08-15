@@ -3,5 +3,38 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/aws.developer.practice/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/aws.developer.practice/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/check-inventory/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/check-inventory/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/create-order/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/create-order/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/daily-inventory-report/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/daily-inventory-report/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/get-order-status/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/get-order-status/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/get-order/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/get-order/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/list-orders/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/list-orders/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/process-order/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/process-order/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/publish-outcome/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/publish-outcome/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/reserve-stock/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/reserve-stock/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/rollback-reservations/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/rollback-reservations/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/send-customer-email/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/send-customer-email/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/update-order-status/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/functions/update-order-status/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/practice-only/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/provisioning/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/provisioning/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sample-learning-project/src/main/resources" charset="UTF-8" />
   </component>
 </project>

@@ -7,6 +7,21 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="aws.developer.practice" />
+        <module name="cloudtrack-provisioning" />
+        <module name="send-customer-email" />
+        <module name="get-order-status" />
+        <module name="list-orders" />
+        <module name="update-order-status" />
+        <module name="create-order" />
+        <module name="reserve-stock" />
+        <module name="cloudtrack-practice-only" />
+        <module name="get-order" />
+        <module name="rollback-reservations" />
+        <module name="publish-outcome" />
+        <module name="cloudtrack-common" />
+        <module name="process-order" />
+        <module name="check-inventory" />
+        <module name="daily-inventory-report" />
       </profile>
     </annotationProcessing>
   </component>

@@ -1,22 +1,32 @@
 package com.cloudtrack.provisioning;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.services.sqs.SqsClient;
-import software.amazon.awssdk.services.sqs.model.*;
+import software.amazon.awssdk.services.sqs.model.QueueAttributeName;
+import software.amazon.awssdk.services.sqs.model.QueueDoesNotExistException;
 
 import java.util.Map;
 
 public class SqsSetup {
 
+    private static final Logger logger = LoggerFactory.getLogger(SqsSetup.class);
+    private static final String SQS_PREFIX = "[SQS] ";
+
+    private SqsSetup() {
+        // Utility class private constructor
+    }
+
     public static String setupQueueWithDlq(SqsClient sqs, String queueName, String dlqName) {
-        System.out.println("[SQS] Setting up queue " + queueName + " and DLQ " + dlqName + "...");
+        logger.info("{}Setting up queue {} and DLQ {}...", SQS_PREFIX, queueName, dlqName);
 
         String dlqUrl;
         try {
             dlqUrl = sqs.getQueueUrl(r -> r.queueName(dlqName)).queueUrl();
-            System.out.println("[SQS] DLQ " + dlqName + " exists: " + dlqUrl);
+            logger.info("{}DLQ {} exists: {}", SQS_PREFIX, dlqName, dlqUrl);
         } catch (QueueDoesNotExistException e) {
             dlqUrl = sqs.createQueue(r -> r.queueName(dlqName)).queueUrl();
-            System.out.println("[SQS] Created DLQ " + dlqName + ": " + dlqUrl);
+            logger.info("{}Created DLQ {}: {}", SQS_PREFIX, dlqName, dlqUrl);
         }
 
         String dlqArn = sqs.getQueueAttributes(r -> r
@@ -29,7 +39,7 @@ public class SqsSetup {
         String mainQueueUrl;
         try {
             mainQueueUrl = sqs.getQueueUrl(r -> r.queueName(queueName)).queueUrl();
-            System.out.println("[SQS] Main queue " + queueName + " exists: " + mainQueueUrl);
+            logger.info("{}Main queue {} exists: {}", SQS_PREFIX, queueName, mainQueueUrl);
         } catch (QueueDoesNotExistException e) {
             mainQueueUrl = sqs.createQueue(r -> r
                     .queueName(queueName)
@@ -37,7 +47,7 @@ public class SqsSetup {
                             QueueAttributeName.REDRIVE_POLICY, redrivePolicy,
                             QueueAttributeName.VISIBILITY_TIMEOUT, "60"
                     ))).queueUrl();
-            System.out.println("[SQS] Created main queue " + queueName + ": " + mainQueueUrl);
+            logger.info("{}Created main queue {}: {}", SQS_PREFIX, queueName, mainQueueUrl);
         }
 
         return mainQueueUrl;
