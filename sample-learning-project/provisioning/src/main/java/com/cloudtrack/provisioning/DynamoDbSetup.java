@@ -1,59 +1,67 @@
 package com.cloudtrack.provisioning;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
-import software.amazon.awssdk.services.dynamodb.model.*;
+import software.amazon.awssdk.services.dynamodb.model.KeyType;
+import software.amazon.awssdk.services.dynamodb.model.ProjectionType;
+import software.amazon.awssdk.services.dynamodb.model.ResourceNotFoundException;
+import software.amazon.awssdk.services.dynamodb.model.ScalarAttributeType;
+import software.amazon.awssdk.services.dynamodb.model.StreamViewType;
 
 public class DynamoDbSetup {
+
+    private static final Logger logger = LoggerFactory.getLogger(DynamoDbSetup.class);
+    private static final String TABLE_MSG_PREFIX = "[DynamoDB] Table ";
+
+    private DynamoDbSetup() {
+        // Utility class private constructor
+    }
 
     public static void setupOrdersTable(DynamoDbClient ddb, String tableName) {
         try {
             ddb.describeTable(r -> r.tableName(tableName));
-            System.out.println("[DynamoDB] Table " + tableName + " already exists.");
+            logger.info("{}{} already exists.", TABLE_MSG_PREFIX, tableName);
             return;
         } catch (ResourceNotFoundException e) {
-            System.out.println("[DynamoDB] Creating table " + tableName + "...");
+            logger.info("{}Creating table {}...", TABLE_MSG_PREFIX, tableName);
         }
 
         ddb.createTable(r -> r
                 .tableName(tableName)
                 .attributeDefinitions(
-                        AttributeDefinition.builder().attributeName("orderId").attributeType(ScalarAttributeType.S).build(),
-                        AttributeDefinition.builder().attributeName("customerId").attributeType(ScalarAttributeType.S).build(),
-                        AttributeDefinition.builder().attributeName("createdAt").attributeType(ScalarAttributeType.S).build())
-                .keySchema(KeySchemaElement.builder().attributeName("orderId").keyType(KeyType.HASH).build())
-                .globalSecondaryIndexes(GlobalSecondaryIndex.builder()
+                        a -> a.attributeName("orderId").attributeType(ScalarAttributeType.S),
+                        a -> a.attributeName("customerId").attributeType(ScalarAttributeType.S),
+                        a -> a.attributeName("createdAt").attributeType(ScalarAttributeType.S))
+                .keySchema(k -> k.attributeName("orderId").keyType(KeyType.HASH))
+                .globalSecondaryIndexes(gsi -> gsi
                         .indexName("CustomerIndex")
                         .keySchema(
-                                KeySchemaElement.builder().attributeName("customerId").keyType(KeyType.HASH).build(),
-                                KeySchemaElement.builder().attributeName("createdAt").keyType(KeyType.RANGE).build())
-                        .projection(Projection.builder().projectionType(ProjectionType.ALL).build())
-                        .provisionedThroughput(ProvisionedThroughput.builder().readCapacityUnits(5L).writeCapacityUnits(5L).build())
-                        .build())
-                .provisionedThroughput(ProvisionedThroughput.builder().readCapacityUnits(5L).writeCapacityUnits(5L).build())
-                .streamSpecification(StreamSpecification.builder()
-                        .streamEnabled(true)
-                        .streamViewType(StreamViewType.NEW_AND_OLD_IMAGES)
-                        .build()));
+                                k -> k.attributeName("customerId").keyType(KeyType.HASH),
+                                k -> k.attributeName("createdAt").keyType(KeyType.RANGE))
+                        .projection(p -> p.projectionType(ProjectionType.ALL))
+                        .provisionedThroughput(pt -> pt.readCapacityUnits(5L).writeCapacityUnits(5L)))
+                .provisionedThroughput(pt -> pt.readCapacityUnits(5L).writeCapacityUnits(5L))
+                .streamSpecification(s -> s.streamEnabled(true).streamViewType(StreamViewType.NEW_AND_OLD_IMAGES)));
 
-        System.out.println("[DynamoDB] Table " + tableName + " creation initiated.");
+        logger.info("{}{} creation initiated.", TABLE_MSG_PREFIX, tableName);
     }
 
     public static void setupInventoryTable(DynamoDbClient ddb, String tableName) {
         try {
             ddb.describeTable(r -> r.tableName(tableName));
-            System.out.println("[DynamoDB] Table " + tableName + " already exists.");
+            logger.info("{}{} already exists.", TABLE_MSG_PREFIX, tableName);
             return;
         } catch (ResourceNotFoundException e) {
-            System.out.println("[DynamoDB] Creating table " + tableName + "...");
+            logger.info("{}Creating table {}...", TABLE_MSG_PREFIX, tableName);
         }
 
         ddb.createTable(r -> r
                 .tableName(tableName)
-                .attributeDefinitions(
-                        AttributeDefinition.builder().attributeName("sku").attributeType(ScalarAttributeType.S).build())
-                .keySchema(KeySchemaElement.builder().attributeName("sku").keyType(KeyType.HASH).build())
-                .provisionedThroughput(ProvisionedThroughput.builder().readCapacityUnits(5L).writeCapacityUnits(5L).build()));
+                .attributeDefinitions(a -> a.attributeName("sku").attributeType(ScalarAttributeType.S))
+                .keySchema(k -> k.attributeName("sku").keyType(KeyType.HASH))
+                .provisionedThroughput(pt -> pt.readCapacityUnits(5L).writeCapacityUnits(5L)));
 
-        System.out.println("[DynamoDB] Table " + tableName + " creation initiated.");
+        logger.info("{}{} creation initiated.", TABLE_MSG_PREFIX, tableName);
     }
 }

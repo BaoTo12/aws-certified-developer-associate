@@ -49,7 +49,7 @@ if (!exists) {
 
 ### IAM role + inline policy
 ```java
-IamClient iam = IamClient.create();
+IamClient iam = IamClient.builder().build();
 
 String trustPolicy = """
     {"Version":"2012-10-17","Statement":[{"Effect":"Allow",
