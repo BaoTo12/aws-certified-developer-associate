@@ -1,0 +1,32 @@
+# Target directories (Maven build artifacts)
+**/target/
+target/
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Eclipse
+.classpath
+.project
+.settings/
+.metadata/
+bin/
+tmp/
+
+# VS Code
+.vscode/
+
+# OS/System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# AWS SAM build directories
+.aws-sam/
+
+# Log files
+*.log
